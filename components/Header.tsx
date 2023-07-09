@@ -7,11 +7,13 @@ import { RxCaretLeft, RxCaretRight } from 'react-icons/rx';
 import { HiHome } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { FaUserAlt } from 'react-icons/fa';
-import { toast } from 'react-hot-toast'
+import { toast } from 'react-hot-toast';
 
-import Button from './Button';
 import useAuthModal from '@/hooks/useAuthModal';
 import { useUser } from '@/hooks/useUser';
+import usePlayer from '@/hooks/usePlayer';
+
+import Button from './Button';
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -19,21 +21,22 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ children, className }) => {
-  const authModal = useAuthModal();
   const router = useRouter();
-
   const supabaseClient = useSupabaseClient();
+
   const { user } = useUser();
+  const player = usePlayer();
+  const authModal = useAuthModal();
 
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
-    // TODO: Reset any playing songs
+    player.reset();
     router.refresh();
 
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success('Logged Out')
+      toast.success('Logged Out');
     }
   };
 
@@ -133,16 +136,13 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           "
         >
           {user ? (
-            <div className='flex gap-x-4 items-center'>
-              <Button
-                onClick={handleLogout}
-                className='bg-white px-6 py-2'
-              >
+            <div className="flex gap-x-4 items-center">
+              <Button onClick={handleLogout} className="bg-white px-6 py-2">
                 Logout
               </Button>
               <Button
                 onClick={() => router.push('/account')}
-                className='bg-white'
+                className="bg-white"
               >
                 <FaUserAlt />
               </Button>
