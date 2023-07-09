@@ -12,7 +12,6 @@
 - Stripe integration
 - Tailwind design, animations and transition effects
 - Credential authentication with Supabase
-- Github authentication integration
 - File and image upload using Supabase storage
 - Client form validation and handling
 - Server error handling
