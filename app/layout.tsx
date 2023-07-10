@@ -15,7 +15,7 @@ import ModalProvider from '@/providers/ModalProvider';
 const font = Figtree({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Spotify Clone',
+  title: 'Music Player',
   description: 'Listen to Music',
 };
 
