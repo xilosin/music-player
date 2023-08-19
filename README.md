@@ -1,5 +1,5 @@
 # Full Stack Spotify Clone
-[Website](https://ecommerce-admin-two-chi.vercel.app)
+[Website](https://music-player-omega-nine.vercel.app)
 
 ## Stack
 - NextJS 13.4
